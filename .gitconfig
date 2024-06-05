@@ -1,0 +1,36 @@
+[alias]
+    ldiff = log -p
+    lstat = log --stat
+    lgrep = log --grep
+    lga = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --branches
+    lhistory = "!git log --pretty=format: --name-only | sort | uniq -c | sort -rg | head -10"
+    st = status
+    unstage = reset HEAD --
+    stgi = add --interactive
+    # Otherwise git show uses the standard unix diff and not the nice difft :D 
+    sc = show --ext-diff
+
+    # How to fix an error:
+    # git add ...           # Add the fix.
+    # git commit            # Committed, but in the wrong place.
+    # git rebase -i HEAD~5  # Examine the last 5 commits for rebasing.
+[core]
+    editor = nvim
+[commit]
+    # Using verbose mode, git will show you the diff between your commit and the one before
+    # Below the commit message. This diff *will not get included* in the commit message!
+    verbose = true
+    template = ~/.gitmessage
+[init]
+	defaultBranch = main
+[push]
+    autoSetupRemote = true
+[merge]
+	conflictstyle = zdiff3
+[diff]
+	external = difft
+    algorithm = histogram
+[branch]
+	sort = -committerdate
+[rebase]
+    autosquash = true
